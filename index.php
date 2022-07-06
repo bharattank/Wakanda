@@ -6,9 +6,8 @@
  */
 get_header();
 ?>
-
     <div class="content">
         content
     </div>
-<?php 
+<?php
 get_footer();
