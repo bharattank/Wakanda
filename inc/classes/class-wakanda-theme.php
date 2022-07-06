@@ -14,36 +14,72 @@ class WAKANDA_THEME {
 
     protected function __construct() {
         //Load class
-        $this->setup_hooks();
+        Assets::get_instance();
+        Menus::get_instance();
 
+        $this->setup_hooks();
     }
 
     protected function setup_hooks() {
         /**
          * Actions
          */
-        add_action( 'wp_enqueue_scripts', [ $this, 'register_styles' ] );
-        add_action( 'wp_enqueue_scripts', [ $this, 'register_scripts' ] );
-
+        add_action( 'after_setup_theme', [ $this, 'wakanda_theme_setup' ] );
     }
 
-    public function register_styles() {
-        // Register Styles
-        wp_register_style( 'stylesheet', get_stylesheet_uri(), [], filemtime( WAKANDA_DIR_PATH . '/style.css' ), 'all' );
-        wp_register_style( 'bootstrap-css', WAKANDA_DIR_URI . '/assets/src/library/css/bootstrap.min.css', [], false, 'all' );
+    public function wakanda_theme_setup() {
+        /** Site Title **/
+        add_theme_support( 'title-tag' );
 
-        // Enqueue Styles
-        wp_enqueue_style( 'stylesheet' );
-        wp_enqueue_style( 'bootstrap-css' );
-    }
+        /** custom logo **/
+        add_theme_support( 'custom-logo', [
+            'header-text' => [ 'site-title', 'site-description' ],
+            'height'      => 100,
+            'width'       => 400,
+            'flex-height' => true,
+            'flex-width'  => true,
+        ] );
 
-    public function register_scripts() {
-         // Register Scripts
-        wp_register_script( 'main-js', WAKANDA_DIR_URI . '/assets/main.js', [], filemtime( WAKANDA_DIR_PATH . '/assets/main.js' ), true );
-        wp_register_script( 'bootstrap-js', WAKANDA_DIR_URI . '/assets/src/library/js/bootstrap.bundle.min.js', ['jquery'], false, true );
+        /** custom Background **/
+        add_theme_support( 'custom-background', [
+            'default-color'      => '#fff',
+            'default-image'      => '',
+            'default-repeat'     => 'no-repeat',
+        ] );
 
-        // Enqueue Scripts
-        wp_enqueue_script( 'main-js' );
-        wp_enqueue_script( 'bootstrap-js' );
+        /** Enable support for Post Thumbnails on posts and pages. **/
+        add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+
+        /** Add theme support for selective refresh for widgets. **/
+        add_theme_support( 'customize-selective-refresh-widgets' );
+
+		// Add default posts and comments RSS feed links to head.
+		add_theme_support( 'automatic-feed-links' );
+
+        add_theme_support(
+			'html5',
+			[
+				'search-form',
+				'comment-form',
+				'comment-list',
+				'gallery',
+				'caption',
+				'script',
+				'style',
+			]
+		);
+
+        /**
+		 * Some blocks in Gutenberg like tables, quotes, separator benefit from structural styles (margin, padding, border etc…)*/
+        add_theme_support( 'wp-block-styles' );
+
+        /**
+		 * Some blocks such as the image block have the possibility to define*/
+        add_theme_support( 'align-wide' );
+
+        /**
+		 * Loads the editor styles in the Gutenberg editor.*/
+        add_theme_support( 'editor-styles' );
     }
 }
