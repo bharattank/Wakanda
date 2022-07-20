@@ -36,6 +36,8 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
               if( ! $menu_item->menu_item_parent ) {
 
                 $child_menu_items = $menu_class->get_child_menu_items( $header_menus, $menu_item->ID );
+                // echo '<pre>';
+                // print_r($child_menu_items);
 
                 $has_children = ! empty( $child_menu_items ) && is_array( $child_menu_items );
 
