@@ -14,6 +14,7 @@
  }
 
  require_once WAKANDA_DIR_PATH . '/inc/helpers/autoloader.php';
+ require_once WAKANDA_DIR_PATH . '/inc/helpers/template-tags.php';
 
 function wakanda_get_theme_instance() {
     \WAKANDA_THEME\Inc\WAKANDA_THEME::get_instance();
