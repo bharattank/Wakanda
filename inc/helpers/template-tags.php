@@ -5,7 +5,11 @@
  * @package wakanda
  */
 
- function get_the_post_custom_thumbnail( $post_id, $size = 'featured-image', $additional_attribute = [] ) {
+
+ /**
+  * Return post thumbnail
+  */
+ function get_the_post_custom_thumbnail( $post_id, $size = 'featured-thumbnail', $additional_attribute = [] ) {
     $custom_thumbnail = '';
 
     if ( null === $post_id ) {
@@ -30,6 +34,9 @@
     return $custom_thumbnail;
 }
 
-function the_post_custom_thumbnail( $post_id, $size = 'featured-large', $additional_attribute = [] ) {
+/**
+  * Print post thumbnail
+  */
+function the_post_custom_thumbnail( $post_id, $size = 'featured-thumbnail', $additional_attribute = [] ) {
     echo get_the_post_custom_thumbnail( $post_id, $size, $additional_attribute );
 }

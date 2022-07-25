@@ -51,6 +51,9 @@ class WAKANDA_THEME {
         add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
 
+        /** Registre image Sizes */
+        add_image_size( 'featured-thumbnail', 350, 233, true );
+
         /** Add theme support for selective refresh for widgets. **/
         add_theme_support( 'customize-selective-refresh-widgets' );
 
