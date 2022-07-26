@@ -16,6 +16,7 @@ class WAKANDA_THEME {
         //Load class
         Assets::get_instance();
         Menus::get_instance();
+        Meta_boxes::get_instance();
 
         $this->setup_hooks();
     }
